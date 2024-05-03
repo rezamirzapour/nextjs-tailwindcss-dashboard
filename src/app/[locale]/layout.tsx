@@ -1,10 +1,20 @@
-"use client";
 import "jsvectormap/dist/css/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
 import "@/css/satoshi.css";
 import "@/css/style.css";
-import React, { useEffect, useState } from "react";
-import Loader from "@/components/common/Loader";
+import React from "react";
+import { Vazirmatn, Inter } from "next/font/google";
+import { NextIntlClientProvider, useMessages } from "next-intl";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const vazirmatn = Vazirmatn({
+  variable: "--font-vazirmatn",
+  subsets: ["arabic"],
+});
 
 export default function RootLayout({
   children,
@@ -13,21 +23,20 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  // const pathname = usePathname();
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
-
+  const messages = useMessages();
   return (
     <html lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
-      <body suppressHydrationWarning={true}>
-        <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          {loading ? <Loader /> : children}
-        </div>
+      <body
+        suppressHydrationWarning={true}
+        className={
+          locale === "fa"
+            ? `${vazirmatn.variable} font-vazirmatn`
+            : `${inter.variable} font-inter`
+        }
+      >
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <div className="dark:bg-boxdark-2 dark:text-bodydark">{children}</div>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
