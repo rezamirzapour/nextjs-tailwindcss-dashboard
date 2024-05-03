@@ -1,5 +1,23 @@
 {
-    "Index": {
-        "title": "Hello world!"
+    "common": {
+        "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit suspendisse.",
+        "type_to_search": "Type to search"
+    },
+    "dashboard": {
+        "dashboard": "Dashboard"
+    },
+    "signIn": {
+        "email": "Email",
+        "re-type": "Re-Type",
+        "password": "Password",
+        "email_placeholder": "Enter your email",
+        "password_placeholder": "Enter your password",
+        "sign_in": "Sign in",
+        "sign_up": "Sign up",
+        "google": "Google",
+        "with": "with",
+        "no_account": "Don’t have any account",
+        "start_for_free": "Start for free",
+        "sign_in_to": "Sing In to"
     }
 }
