@@ -18,6 +18,11 @@
         "with": "با",
         "no_account": "حساب کاربری ندارید",
         "start_for_free": "رایگان شروع کنید",
-        "sign_in_to": "ورود به"
+        "sign_in_to": "ورود به",
+        "phone_number": "شماره موبایل",
+        "phone_number_placeholder": "شماره همراه خود را وارد کنید",
+        "send_code": "ارسال کد اعتبارسنجی",
+        "code": "کد اعتبارسنجی",
+        "code_placeholder": "کد اعتبارسنجی را وارد کنید"
     }
 }

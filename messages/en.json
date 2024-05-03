@@ -18,6 +18,11 @@
         "with": "with",
         "no_account": "Don’t have any account",
         "start_for_free": "Start for free",
-        "sign_in_to": "Sing In to"
+        "sign_in_to": "Sing In to",
+        "phone_number": "Phone number",
+        "phone_number_placeholder": "Enter your phone number",
+        "send_code": "Send verification code",
+        "code": "Verification code",
+        "code_placeholder": "Enter verification code"
     }
 }
