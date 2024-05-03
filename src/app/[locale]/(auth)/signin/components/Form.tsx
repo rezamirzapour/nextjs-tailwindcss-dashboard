@@ -6,7 +6,7 @@ import Link from "next/link";
 const Form: React.FC = () => {
   const messages = useMessages();
   return (
-    <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
+    <div className="w-full border-stroke dark:border-strokedark xl:w-1/2">
       <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
         <span className="mb-1.5 block font-medium">
           {messages.signIn.start_for_free}
