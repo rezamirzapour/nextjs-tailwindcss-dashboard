@@ -5,6 +5,7 @@ import "@/css/style.css";
 import React from "react";
 import { Vazirmatn, Inter } from "next/font/google";
 import { NextIntlClientProvider, useMessages } from "next-intl";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,7 +36,11 @@ export default function RootLayout({
         }
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <div className="dark:bg-boxdark-2 dark:text-bodydark">{children}</div>
+          <ReactQueryProvider>
+            <div className="dark:bg-boxdark-2 dark:text-bodydark">
+              {children}
+            </div>
+          </ReactQueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>
