@@ -8,8 +8,10 @@ import Loader from "@/components/common/Loader";
 
 export default function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -21,7 +23,7 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en">
+    <html lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
           {loading ? <Loader /> : children}
