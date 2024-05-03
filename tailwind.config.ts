@@ -10,7 +10,8 @@ const config: Config = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      satoshi: ["Satoshi", "sans-serif"],
+      inter: ["var(--font-inter)"],
+      vazirmatn: ["var(--font-vazirmatn)"],
     },
     screens: {
       "2xsm": "375px",
