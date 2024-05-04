@@ -2,8 +2,8 @@ import { API_BASE_URL } from "@/utils/constants";
 import type { RegisterDto, VerifyDto } from "./AuthService.type";
 
 export default class AuthService {
-  async register(body: RegisterDto) {
-    return fetch(`${API_BASE_URL}/register`, {
+  async signup(body: RegisterDto) {
+    return fetch(`${API_BASE_URL}/auth/signup`, {
       body: JSON.stringify(body),
       method: "POST",
       headers: {
@@ -14,7 +14,7 @@ export default class AuthService {
   }
 
   async verify(body: VerifyDto) {
-    return fetch(`${API_BASE_URL}/verify`, {
+    return fetch(`${API_BASE_URL}/auth/verify`, {
       body: JSON.stringify(body),
       method: "POST",
       headers: {
