@@ -1,33 +1,56 @@
 "use client";
 import React, { useState } from "react";
-import { useMessages } from "next-intl";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useMessages } from "next-intl";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 import AuthService from "@/services/auth/AuthService";
 import clsx from "clsx";
-import { useMutation } from "@tanstack/react-query";
-import type { RegisterDto, VerifyDto } from "@/services/auth/AuthService.type";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import * as yup from "yup";
+import type { VerifyDto } from "@/services/auth/AuthService.type";
 
 const authService = new AuthService();
 
 const Form: React.FC = () => {
   const [isWaitingForCode, setIsWaitingForCode] = useState<boolean>(false);
   const messages = useMessages();
+
+  const schema = yup
+    .object<VerifyDto>({
+      phone: yup
+        .string()
+        .matches(/((0?9)|(\+?989))\d{9}/g, {
+          message: messages.signIn.phone_number_validation,
+        })
+        .required({
+          message: messages.signIn.phone_number_required,
+        }),
+      code: yup.string(),
+    })
+    .required();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<VerifyDto>();
+  } = useForm<VerifyDto>({
+    resolver: yupResolver(schema),
+  });
 
   const {
-    data: registerData,
-    mutateAsync: registerFn,
-    isPending: isRegisterPending,
+    data: signinData,
+    mutateAsync: signinFn,
+    isPending: isSigninPending,
   } = useMutation({
-    mutationFn: (body) => authService.signup(body),
+    mutationFn: (body) => authService.signin(body),
+    onError(error) {
+      console.log("error", error);
+    },
   });
 
   const {
@@ -36,14 +59,28 @@ const Form: React.FC = () => {
     isPending: isVerifyPending,
   } = useMutation({
     mutationFn: (body) => authService.verify(body),
+    onError(error) {
+      console.log("error", error);
+    },
   });
 
+  const {
+    data: setCookieData,
+    mutateAsync: setCookieFn,
+    isPending: isSetCookiePending,
+  } = useMutation({
+    mutationFn: (token) => authService.setCookie(token),
+  });
+
+  const router = useRouter();
   const onSubmit: SubmitHandler<VerifyDto> = async (data) => {
     if (!isWaitingForCode) {
-      await registerFn(data);
+      await signinFn(data);
       setIsWaitingForCode(true);
     } else {
-      await verifyFn(data);
+      const response = await verifyFn(data);
+      await setCookieFn(response.data.token);
+      router.push("/fa");
     }
   };
 
@@ -65,7 +102,8 @@ const Form: React.FC = () => {
             }}
             label={messages.signIn.phone_number}
             placeholder={messages.signIn.phone_number_placeholder}
-            {...register("phoneNumber")}
+            error={errors.phone?.message}
+            {...register("phone")}
           />
           <Input
             labelTextSize="large"
@@ -74,12 +112,13 @@ const Form: React.FC = () => {
             }}
             label={messages.signIn.code}
             placeholder={messages.signIn.code_placeholder}
+            error={errors.code?.message}
             {...register("code")}
           />
           <div className="mb-5">
             <Button
               type="submit"
-              disabled={isRegisterPending || isVerifyPending}
+              disabled={isSigninPending || isVerifyPending}
               fullWidth
             >
               {isWaitingForCode

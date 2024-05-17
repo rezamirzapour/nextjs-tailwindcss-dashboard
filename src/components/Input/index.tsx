@@ -5,7 +5,7 @@ import { forwardRef, RefAttributes } from "react";
 const Input: React.ForwardRefExoticComponent<
   Omit<IProps, "ref"> & RefAttributes<HTMLInputElement>
 > = forwardRef(function InputRender(
-  { label, labelTextSize = "small", containerProps, ...props },
+  { label, labelTextSize = "small", containerProps, error, ...props },
   ref,
 ) {
   return (
@@ -24,6 +24,7 @@ const Input: React.ForwardRefExoticComponent<
         {...props}
         className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
       />
+      {error && <span className="text-sm text-rose-600">{error}</span>}
     </div>
   );
 });

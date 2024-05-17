@@ -21,6 +21,8 @@
         "sign_in_to": "ورود به",
         "phone_number": "شماره موبایل",
         "phone_number_placeholder": "شماره موبایل خود را وارد کنید",
+        "phone_number_validation": "شماره موبابل صحیح نمی باشد",
+        "phone_number_required": "شماره موبابل اجباری است",
         "send_code": "ارسال کد اعتبارسنجی",
         "code": "کد اعتبارسنجی",
         "code_placeholder": "کد اعتبارسنجی را وارد کنید"

@@ -21,6 +21,8 @@
         "sign_in_to": "Sing In to",
         "phone_number": "Phone number",
         "phone_number_placeholder": "Enter your phone number",
+        "phone_number_validation": "Phone number is not valid",
+        "phone_number_required": "Phone number is required",
         "send_code": "Send verification code",
         "code": "Verification code",
         "code_placeholder": "Enter verification code"

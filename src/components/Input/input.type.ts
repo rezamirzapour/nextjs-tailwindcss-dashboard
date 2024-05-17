@@ -12,4 +12,5 @@ export interface IProps
   label: string;
   labelTextSize?: "small" | "medium" | "large";
   containerProps?: HTMLAttributes<HTMLDivElement>;
+  error?: string;
 }

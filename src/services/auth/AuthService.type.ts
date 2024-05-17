@@ -1,8 +1,12 @@
-export interface RegisterDto {
-  phoneNumber: string;
+export interface SignupDto {
+  phone: string;
+}
+
+export interface SigninDto {
+  phone: string;
 }
 
 export interface VerifyDto {
-  phoneNumber: string;
+  phone: string;
   code: string;
 }
